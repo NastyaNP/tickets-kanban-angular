@@ -1,0 +1,41 @@
+<div class="projects-list">
+    <div class="projects-list__header">
+        <h4>My Projects</h4>
+        <app-create-project-button [formLoading]="formLoading" (createProject)="createProject.emit($event)"></app-create-project-button>
+    </div>
+    <div class="projects-list__content">
+        @if (loading) {
+            <tui-loader size="l"></tui-loader>
+        } @else {
+            @for (project of projects; track project) {
+                <a class="projects-list__item" [class._selected]="selectedProject?.id === project.id" [routerLink]="'/project/' + project.id">
+                    <div class="tui-row tui-row_align_center">
+                        <div class="projects-list__item-point"></div>
+                        {{ project.name }}
+                    </div>
+                    <app-project-actions
+                            class="projects-list__item-actions"
+                            (projectEdit)="editProject.emit(project)"
+                            (projectDelete)="deleteProject.emit(project)"
+                    ></app-project-actions>
+                </a>
+            } @empty {
+                <tui-block-status>
+                    <img
+                            alt="survived"
+                            ngSrc="https://taiga-ui.dev/assets/images/going-up.svg"
+                            priority="high"
+                            width="300"
+                            height="300"
+                            tuiSlot="top"
+                    />
+
+                    <div class="projects-list__empty">
+                        <h4>You don't have any projects yet</h4>
+                        <p>Click the button above to create your first project or ask to be assigned to a project</p>
+                    </div>
+                </tui-block-status>
+            }
+        }
+    </div>
+</div>

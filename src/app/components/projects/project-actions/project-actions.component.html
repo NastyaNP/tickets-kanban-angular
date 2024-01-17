@@ -1,0 +1,33 @@
+<tui-hosted-dropdown
+    #dropdown
+    [content]="content"
+    [(open)]="isMenuOpen"
+>
+    <button
+            appearance="icon"
+            [icon]="horizontalDotsIcon"
+            tuiIconButton
+            type="button"
+            size="xs"
+            [pseudoHover]="dropdown.open || null"
+    ></button>
+</tui-hosted-dropdown>
+
+<ng-template #horizontalDotsIcon>
+    <tui-icon icon="tuiIconMoreHorizontal"></tui-icon>
+</ng-template>
+
+<ng-template
+    #content
+    let-activeZone
+>
+    <tui-data-list
+            tuiDataListDropdownManager
+            size="s"
+            [tuiActiveZoneParent]="activeZone"
+    >
+        <button tuiOption (click)="emitEvent(projectEdit)">Edit</button>
+        <button tuiOption (click)="emitEvent(projectDelete)">Remove</button>
+    </tui-data-list>
+
+</ng-template>

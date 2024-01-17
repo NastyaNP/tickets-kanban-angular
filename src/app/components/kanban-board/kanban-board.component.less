@@ -1,0 +1,57 @@
+@import "vars";
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+.kanban-page {
+    height: 100%;
+    margin-top: @size-m;
+
+    display: flex;
+    flex-direction: column;
+    gap: @size-l;
+
+    &__tools {
+        display: flex;
+        align-items: center;
+        gap: @size-common;
+
+        &-filter {
+            flex: 1 1;
+        }
+
+        &-sorting {
+            flex: 1 1;
+        }
+
+        &-search {
+            flex: 2 1 50%;
+        }
+    }
+
+    &__scroll {
+        flex: 1;
+
+        ::ng-deep {
+            .t-content {
+                height: 100%;
+            }
+        }
+    }
+
+    &__board {
+        display: flex;
+        justify-content: space-between;
+
+        gap: 12px;
+
+        height: 100%;
+        width: 100%;
+
+        &-list {
+            flex: 1 1 25%;
+        }
+    }
+}

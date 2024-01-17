@@ -1,0 +1,29 @@
+<div class="project-users">
+    <app-invite-button
+            class="project-users__invite-button"
+            [users]="project.users"
+            (inviteUsers)="inviteUsers.emit($event)"
+    ></app-invite-button>
+    <tui-avatar-stack class="project-users__avatars">
+        @for (user of project.users | slice : 0 : 4; track user) {
+            <tui-avatar
+                    *tuiLet="user.username | slice : 0 : 2 | uppercase as name"
+                    size="s"
+                    [round]="true"
+                    [src]="name"
+                    [style.background]="name | tuiAutoColor"
+            >{{ name }}
+            </tui-avatar>
+        }
+        @if (usersLength > 4) {
+            <tui-avatar
+                    *tuiLet="('+' + (project.users.length - 4).toString()) as name"
+                    size="s"
+                    [round]="true"
+                    [src]="name"
+                    [style.background]="name | tuiAutoColor"
+            >{{ name }}
+            </tui-avatar>
+        }
+    </tui-avatar-stack>
+</div>

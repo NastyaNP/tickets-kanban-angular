@@ -1,0 +1,41 @@
+<div class="ticket-list" [ngStyle]="{
+    '--ticket-list-color': color
+}">
+    <div class="ticket-list__header">
+        <div class="ticket-list__header-title">
+            <div class="ticket-list__header-title-dot"></div>
+            <span>{{ status }}</span>
+            <span class="ticket-list__header-title-counter">{{ tickets.length }}</span>
+        </div>
+        <div class="ticket-list__header-actions">
+            @if (showCreateButton) {
+                <app-create-ticket-button
+                        [projectName]="projectName"
+                        [formLoading]="formLoading"
+                        (createTicket)="createTicket.emit($event)"
+                ></app-create-ticket-button>
+            }
+        </div>
+    </div>
+    <div
+            class="ticket-list__content"
+            [id]="status + '-drop-list'"
+            cdkDropList
+            [cdkDropListData]="tickets"
+            [cdkDropListConnectedTo]="connectedLists"
+            (cdkDropListDropped)="moveTicket.emit($event)"
+    >
+        @for (ticket of tickets; track ticket) {
+            <app-ticket-card
+                    class="ticket-list__item"
+                    [ticket]="ticket"
+                    (editTicket)="editTicket.emit($event)"
+
+                    cdkDrag
+                    [cdkDragData]="ticket"
+            >
+                <div class="ticket-list__item-placeholder" *cdkDragPlaceholder></div>
+            </app-ticket-card>
+        }
+    </div>
+</div>

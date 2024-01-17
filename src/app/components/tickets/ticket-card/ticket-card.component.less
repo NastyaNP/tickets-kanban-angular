@@ -1,0 +1,58 @@
+@import "vars";
+@import "colors";
+
+@ticket-card-padding: 20px;
+@ticket-card-border-radius: 16px;
+
+.ticket-card {
+    display: flex;
+    flex-direction: column;
+
+    padding: @ticket-card-padding;
+    border-radius: @ticket-card-border-radius;
+    background-color: white;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__content {
+        padding-block-start: @size-xs;
+
+        display: flex;
+        flex-direction: column;
+        gap: @size-sx;
+
+        &-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        &-description {
+            color: @light-text;
+            font-size: 12px;
+            font-weight: 400;
+        }
+    }
+
+    &__footer {
+        flex: 1 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        &-comments {
+            display: flex;
+            gap: @size-s;
+            color: @light-text;
+
+            &-icon {
+                margin-top: 4px;
+                height: 16px;
+                width: 16px;
+            }
+        }
+    }
+}

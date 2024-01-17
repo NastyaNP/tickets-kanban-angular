@@ -1,0 +1,40 @@
+<section class="kanban-page">
+    <div class="kanban-page__tools">
+        <app-search class="kanban-page__tools-search" (searchChange)="onSearchValueChange($event)"></app-search>
+    </div>
+    @if (loading$ | async) {
+        <tui-loader size="xl"></tui-loader>
+    } @else {
+        <tui-scrollbar class="kanban-page__scroll">
+            <div class="kanban-page__board" cdkDropListGroup>
+                @for (list of (ticketLists$ | async)!; track list.tickets) {
+                    <app-ticket-list
+                            class="kanban-page__board-list"
+                            [status]="list.status"
+                            [color]="list.color"
+                            [tickets]="list.tickets"
+                            [showCreateButton]="list.showCreateButton"
+                            [projectName]="(projectName$ | async)!"
+                            [formLoading]="creationInProgress$ | async"
+                            [connectedLists]="connectedLists"
+                            (createTicket)="onCreateTicket($event)"
+                            (editTicket)="openTicketEditingPopup($event)"
+                            (moveTicket)="onMoveTicket($event, $any(list.status))"
+                    ></app-ticket-list>
+                }
+            </div>
+        </tui-scrollbar>
+    }
+</section>
+
+
+<ng-template
+    [(tuiDialog)]="isTicketEditingPopupOpened"
+    [tuiDialogOptions]="{ label: 'Edit Ticket', dismissible: false, closeable: true }"
+>
+    <app-ticket-form
+            [ticket]="editingTicket"
+            (submitForm)="onUpdateTicket($event, editingTicket!);hideTicketEditingPopup()"
+            (cancelled)="hideTicketEditingPopup()"
+    ></app-ticket-form>
+</ng-template>

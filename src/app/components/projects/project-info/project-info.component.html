@@ -1,0 +1,44 @@
+<div class="project-info">
+    @if (project) {
+        <div class="project-info__header">
+            <div class="column-container">
+                <h3 class="project-info__header-title">{{ project.name }}</h3>
+                <div class="project-info__header-actions" >
+                    <button tuiIconButton appearance="icon" [icon]="editIcon" size="xs" (click)="editProject.emit(project)">Edit</button>
+                    <button tuiIconButton appearance="icon" [icon]="copyIcon" size="xs" (click)="writeLinkToClipboard()">Copy</button>
+                </div>
+            </div>
+            <div class="column-container">
+                <div class="project-info__header-team">
+                    <app-project-users [project]="project" (inviteUsers)="inviteUsers.emit($event)"></app-project-users>
+                </div>
+            </div>
+        </div>
+        <div class="project-info__content">
+            <app-kanban-board [project]="project"></app-kanban-board>
+        </div>
+    } @else {
+        <tui-block-status>
+            <img
+                    alt="not found"
+                    ngSrc="https://taiga-ui.dev/assets/images/not-found.svg"
+                    priority="high"
+                    width="144"
+                    height="144"
+                    tuiSlot="top"
+                    class="image"
+            />
+            <h4>Project not selected yet</h4>
+            Please select any project
+        </tui-block-status>
+    }
+</div>
+
+<ng-template #copyIcon>
+    <tui-icon [style.color]="'var(--purple-icon-color)'" icon="tuiIconCopy"></tui-icon>
+</ng-template>
+
+<ng-template #editIcon>
+    <tui-icon [style.color]="'var(--purple-icon-color)'" icon="tuiIconEdit"></tui-icon>
+</ng-template>
+

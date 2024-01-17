@@ -1,0 +1,14 @@
+<app-plus-button (onClick)="showPopup()"></app-plus-button>
+
+<ng-template
+    let-observer
+    [(tuiDialog)]="isPopupVisible"
+    [tuiDialogOptions]="{ label: 'Create Ticket', dismissible: false, closeable: true }"
+>
+    <app-ticket-form
+            [loading]="formLoading"
+            [projectName]="projectName"
+            (submitForm)="onSubmit($event);hidePopup()"
+            (cancelled)="hidePopup()"
+    ></app-ticket-form>
+</ng-template>

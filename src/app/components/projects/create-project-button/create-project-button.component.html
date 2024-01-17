@@ -1,0 +1,13 @@
+<app-plus-button (onClick)="showPopup()"></app-plus-button>
+
+<ng-template
+    let-observer
+    [(tuiDialog)]="isPopupVisible"
+    [tuiDialogOptions]="{ label: 'Create Project', dismissible: false, closeable: true }"
+>
+    <app-project-form
+            [loading]="formLoading"
+            (submitForm)="onSubmit($event);hidePopup()"
+            (cancelled)="hidePopup()"
+    ></app-project-form>
+</ng-template>

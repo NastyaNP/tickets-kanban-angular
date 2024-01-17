@@ -1,0 +1,31 @@
+<div class="main-page" *tuiLet="currentProject$ | async as currentProject">
+    <app-projects-list
+            class="projects-list"
+            [projects]="(projects$ | async)!"
+            [selectedProject]="currentProject"
+            [loading]="loading$ | async"
+            [formLoading]="formLoading$ | async"
+            (createProject)="onCreateProject($event)"
+            (editProject)="openEditProjectPopup($event)"
+            (deleteProject)="onDeleteProject($event)"
+    ></app-projects-list>
+    <app-project-info
+            class="project-info"
+            [project]="currentProject"
+            (editProject)="openEditProjectPopup($event)"
+            (inviteUsers)="onInviteUsersToProject($event, currentProject!)"
+    ></app-project-info>
+</div>
+
+<ng-template
+    let-observer
+    [(tuiDialog)]="isEditingProjectPopupShown"
+    [tuiDialogOptions]="{ label: 'Edit Project', dismissible: false, closeable: true }"
+>
+    <app-project-form
+            [loading]="formLoading$ | async"
+            [project]="editingProject"
+            (submitForm)="onEditProject($event, editingProject!);observer.complete()"
+            (cancelled)="observer.complete()"
+    ></app-project-form>
+</ng-template>

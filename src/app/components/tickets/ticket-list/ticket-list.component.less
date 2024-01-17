@@ -1,0 +1,77 @@
+@import "vars";
+@import "colors";
+
+@ticket-list-border-radius: 16px;
+@ticket-list-padding: 16px;
+@main-color: var(--ticket-list-color, black);
+
+.ticket-list {
+    height: 100%;
+    padding: @ticket-list-padding;
+    border-radius: @ticket-list-border-radius;
+    background-color: #F5F5F5;
+
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        padding-bottom: @size-l;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border-bottom: 3px solid @main-color;
+
+        &-title {
+            display: flex;
+            align-items: center;
+
+            font-size: 16px;
+            font-weight: 500;
+
+            &-dot {
+                margin-inline-end: @size-s;
+                background-color: @main-color;
+                border-radius: 50%;
+                overflow: hidden;
+
+                width: @size-s;
+                height: @size-s;
+            }
+
+            &-counter {
+                height: 20px;
+                width: 20px;
+                margin-inline-start: @size-common;
+
+                font-size: 12px;
+                font-weight: 500;
+
+                text-align: center;
+                color: #625F6D;
+                background-color: #E0E0E0;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    &__content {
+        flex-grow: 1;
+        margin-block: @size-l @size-common;
+
+        display: flex;
+        flex-direction: column;
+        gap: @size-sx;
+
+    }
+
+    &__item {
+        &-placeholder {
+            height: 140px;
+            border-radius: @size-sm;
+            border: 1px dashed fade(@purple, 59%);
+            background-color: fade(@purple, 6%);
+        }
+    }
+}

@@ -1,0 +1,52 @@
+
+<form class="ticket-form" [formGroup]="formGroup">
+    <div class="tui-form__row">
+        <tui-input formControlName="name">
+            Name
+            <input type="text" tuiTextfield>
+        </tui-input>
+    </div>
+    <div class="tui-form__row">
+        <tui-textarea formControlName="description" [expandable]="true" [rows]="4">
+            Description
+        </tui-textarea>
+    </div>
+    <div class="tui-form__row">
+        <tui-combo-box
+                formControlName="assignee"
+                [identityMatcher]="usersIdentityMatcher"
+                [stringify]="stringifyUser"
+                [tuiTextfieldCleaner]="true"
+                (searchChange)="onSearchChange($event)"
+        >
+            Assignee
+            <tui-data-list-wrapper
+                    *tuiDataList
+                    [itemContent]="stringifyUser"
+                    [items]="users$ | async"
+            ></tui-data-list-wrapper>
+        </tui-combo-box>
+    </div>
+    <div class="tui-form__row">
+        <tui-select formControlName="type">
+            Type
+            <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="types$ | async"
+            ></tui-data-list-wrapper>
+        </tui-select>
+    </div>
+    <div class="tui-form__row">
+        <tui-select formControlName="priority">
+            Priority
+            <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="priorities$ | async"
+            ></tui-data-list-wrapper>
+        </tui-select>
+    </div>
+    <div class="ticket-form__footer">
+        <button type="button" tuiButton appearance="primary" size="m" [showLoader]="!!loading" (click)="onSubmitForm()" [disabled]="formGroup.invalid">Save</button>
+        <button type="button" tuiButton appearance="secondary" size="m" (click)="cancelled.emit()">Cancel</button>
+    </div>
+</form>

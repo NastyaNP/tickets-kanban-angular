@@ -1,0 +1,39 @@
+<form class="project-form" [formGroup]="formGroup">
+    <div class="tui-form__row">
+        <tui-input formControlName="name">
+            Name
+            <input type="text" tuiTextfield>
+        </tui-input>
+    </div>
+    <div class="tui-form__row">
+        <tui-textarea formControlName="description" [expandable]="true" [rows]="4">
+            Description
+        </tui-textarea>
+    </div>
+    <div class="tui-form__row">
+        <tui-multi-select
+            formControlName="users"
+            [identityMatcher]="usersIdentityMatcher"
+            [stringify]="stringify"
+            [expandable]="true"
+            [tuiTextfieldCleaner]="true"
+            (searchChange)="onSearchChange($event)"
+        >
+            Assign Users to Project
+            <tui-data-list-wrapper
+                *tuiDataList
+                tuiMultiSelectGroup
+                [itemContent]="contentTemplate"
+                [items]="users$ | async"
+            ></tui-data-list-wrapper>
+        </tui-multi-select>
+    </div>
+    <div class="project-form__footer">
+        <button type="button" tuiButton appearance="primary" size="m" [showLoader]="!!loading" (click)="onSubmitForm()" [disabled]="formGroup.invalid">Save</button>
+        <button type="button" tuiButton appearance="secondary" size="m" (click)="cancelled.emit()">Cancel</button>
+    </div>
+</form>
+
+<ng-template #contentTemplate let-user>
+    {{ user?.username }}
+</ng-template>

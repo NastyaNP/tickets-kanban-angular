@@ -1,0 +1,19 @@
+<div class="ticket-card">
+    <div class="ticket-card__header">
+        <app-ticket-priority class="ticket-card__header-priority"
+                             [priority]="ticket.priority.name"
+                             [status]="ticket.status.name"
+        ></app-ticket-priority>
+        <app-ticket-actions class="ticket-card__header-actions" (ticketEdit)="editTicket.emit(ticket)"></app-ticket-actions>
+    </div>
+    <div class="ticket-card__content">
+        <div class="ticket-card__content-title">{{ ticket.name }}</div>
+        <div class="ticket-card__content-description">{{ ticket.description }}</div>
+    </div>
+    <div class="ticket-card__footer">
+        <div class="ticket-card__footer-comments">
+            <tui-icon class="ticket-card__footer-comments-icon" icon="tuiIconMessageSquare"></tui-icon>
+            {{ ticket.comments.length }} {{ ticket.comments.length === 1 ? 'comment' : 'comments' }}
+        </div>
+    </div>
+</div>

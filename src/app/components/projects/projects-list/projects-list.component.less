@@ -1,0 +1,76 @@
+@import "colors";
+@import "vars";
+@import "fonts";
+
+.projects-list {
+    height: 100%;
+    padding-inline: @size-common;
+    padding-block: @size-xl @size-l;
+    border-right: 1px solid @light;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        h4 {
+            color: @light-text;
+        }
+    }
+
+    &__content {
+        margin-block-start: @size-lx;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: @size-common;
+
+        padding-inline: @size-common;
+        padding-block: @size-sm;
+        border-radius: @size-sx;
+
+        cursor: pointer;
+        text-decoration: none;
+        color: @light-text;
+        .font-medium-size(@size-m);
+
+        &-point {
+            width: @size-s;
+            height: @size-s;
+            border-radius: 50%;
+            background-color: #7AC555;
+        }
+
+        &-actions {
+            justify-self: flex-end;
+        }
+
+        &._selected {
+            background-color: @selected;
+            color: @main-text;
+            .font-semi-bold-size(@size-m);
+        }
+
+        &:not(._selected):hover {
+            background-color: @hover;
+        }
+
+        & + & {
+            margin-top: @size-xs;
+        }
+    }
+
+    &__empty {
+        text-align: center;
+        text-wrap: balance;
+    }
+}
+
+.tui-row {
+    gap: @size-common;
+    margin: 0;
+}

@@ -1,0 +1,41 @@
+@import "vars";
+
+.ticket-priority {
+    padding-block: @size-xs;
+    padding-inline: @size-sx;
+
+    border-radius: @size-xs;
+    overflow: hidden;
+
+    &._low {
+        // the same palette but blue color
+        color: #5D9CEC;
+        background-color: fade(#5D9CEC, 20%);
+    }
+
+    &._completed, &._normal {
+        color: #68B266;
+        background-color: fade(#83C29D, 20%);
+    }
+
+    &._medium {
+        color: #DFA874;
+        background-color: fade(#DFA874, 20%);
+    }
+
+    &._major {
+        color: #D58D49;
+        background-color: fade(#DFA874, 20%);
+    }
+
+    &._critical {
+        color: #D8727D;
+        background-color: fade(#D8727D, 10%);
+    }
+
+    &._blocker {
+        // the same palette but full red bg color and light text color
+        color: white;
+        background-color: #F3565D;
+    }
+}

@@ -1,0 +1,22 @@
+@import "colors";
+@import "vars";
+@import "fonts";
+
+.invite-button {
+    .font-regular-size(@size-m);
+    ::ng-deep {
+        --tui-link: @purple;
+    }
+}
+
+.invite-form {
+    display: flex;
+    flex-direction: column;
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        gap: 8px;
+    }
+}

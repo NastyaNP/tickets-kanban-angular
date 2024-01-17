@@ -1,0 +1,12 @@
+<button
+        class="plus-button"
+        tuiIconButton
+        appearance="icon"
+        size="xs"
+        [icon]="plusIcon"
+        (click)="onClick.emit($event)"
+></button>
+
+<ng-template #plusIcon>
+    <tui-icon [style.color]="'var(--purple-icon-color)'" icon="tuiIconPlusSquare"></tui-icon>
+</ng-template>

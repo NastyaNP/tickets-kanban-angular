@@ -1,0 +1,43 @@
+<button
+        class="invite-button"
+        tuiButton
+        appearance="flat"
+        size="s"
+        [icon]="plusIcon"
+        (click)="showPopup()"
+>Invite</button>
+
+<ng-template #plusIcon>
+    <tui-icon icon="tuiIconPlus"></tui-icon>
+</ng-template>
+
+<ng-template
+    let-observer
+    [(tuiDialog)]="isPopupVisible"
+    [tuiDialogOptions]="{ label: 'Invite users to the project', dismissible: false, closeable: true }"
+>
+    <form class="invite-form">
+        <div class="tui-form__row">
+            <tui-multi-select
+                    [formControl]="usersControl"
+                    [identityMatcher]="usersIdentityMatcher"
+                    [stringify]="stringify"
+                    [expandable]="true"
+                    [editable]="false"
+                    (searchChange)="onSearchChange($event)"
+            >
+                Assign Users to Project
+                <tui-data-list-wrapper
+                        *tuiDataList
+                        tuiMultiSelectGroup
+                        [itemContent]="stringify"
+                        [items]="users$ | async"
+                ></tui-data-list-wrapper>
+            </tui-multi-select>
+        </div>
+        <div class="invite-form__footer">
+            <button type="button" tuiButton appearance="primary" size="m" (click)="onSubmit(usersControl.value);observer.complete()">Save</button>
+            <button type="button" tuiButton appearance="secondary" size="m" (click)="observer.complete()">Cancel</button>
+        </div>
+    </form>
+</ng-template>

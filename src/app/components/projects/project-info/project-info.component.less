@@ -1,0 +1,41 @@
+@import "vars";
+@import "fonts";
+
+:host {
+    padding: @size-l @size-xl;
+}
+
+.project-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .column-container {
+            display: flex;
+            align-items: center;
+            gap: @size-m;
+        }
+
+        &-title {
+            .font-semi-bold-size(46px);
+            line-height: 56px;
+        }
+
+        &-actions {
+            display: flex;
+            align-items: center;
+            gap: @size-m;
+        }
+    }
+
+    &__content {
+        flex-grow: 1;
+    }
+
+}
+
