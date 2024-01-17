@@ -49,7 +49,7 @@ export const appConfig: ApplicationConfig = {
         provideDateTimeValueTransformer(IsoStringDateTimeValueTransformer),
         {
             provide: BACKEND_URL,
-            useValue: "http://localhost:1337",
+            useValue: "https://tickets-kanban-be.onrender.com",
         },
         provideHttpClient(
             withInterceptors([authInterceptor])

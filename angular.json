@@ -62,8 +62,7 @@
                 }
               ],
               "outputHashing": "all",
-              "outputPath": "../../assets/",
-              "baseHref": "/browser/"
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
